@@ -1,4 +1,22 @@
 window.addEventListener("load", function() {
+   this.fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      response.json().then(function(json) {
+         const div = document.getElementById("missionTarget");
+
+         div.innerHTML = `
+         <h2>Mission Destination</h2>
+         <ol>
+            <li>Name: ${json[0].name}</li>
+            <li>Diameter: ${json[0].diameter}</li>
+            <li>Star: ${json[0].star}</li>
+            <li>Distance from Earth: ${json[0].distance}</li>
+            <li>Number of Moons: ${json[0].moons}</li>
+         </ol>
+         <img src="${json[0].image}">
+         `
+
+      })
+   })
    let form = document.querySelector("form");
    form.addEventListener("submit", function(event) {
       let pilotName = document.querySelector("input[name=pilotName]");
@@ -21,29 +39,41 @@ window.addEventListener("load", function() {
 
 
    
-   let pilotStatus = document.getElementById("pilotStatus");
-   pilotStatus.innerHTML = `${pilotName.value} ready`;
-   this.console.log(pilotStatus.innerHTML);
+      let pilotStatus = document.getElementById("pilotStatus");
+      pilotStatus.innerHTML = `${pilotName.value} ready`;
+      //console.log(pilotStatus.innerHTML);
    
-   let copilotStatus = document.getElementById("copilotStatus");
-   copilotStatus.innerHTML = `${copilotName.value} ready`;
-   this.console.log(copilotStatus.innerHTML);
+      let copilotStatus = document.getElementById("copilotStatus");
+      copilotStatus.innerHTML = `${copilotName.value} ready`;
+      //console.log(copilotStatus.innerHTML);
    
-   //let fuelStatus = document.getElementById("fuelStatus");
+      let fuelStatus = document.getElementById("fuelStatus");
+      let cargoStatus = document.getElementById("cargoStatus");
    
-   //let launchStatus = document.getElementById("launchStatus");
-   //this.console.log(launchStatus.innerHTML)
+      let launchStatus = document.getElementById("launchStatus");
+      //console.log(launchStatus.innerHTML)
 
-   let faultyItems = document.getElementById("faultyItems");
-   this.console.log(faultyItems);
+      let faultyItems = document.getElementById("faultyItems");
+      //console.log(faultyItems);
 
-   //if (form.fuelLevel.value < 10,000) {
-      //launchStatus.innerHTML = "Shuttle not ready for launch.";
-     // console.log(launchStatus.innerHTML)
-     // fuelStatus.innerHTML = "Fuel level too low for successful journey.";
-    //  faultyItems.style.visibility = "visible";
-  // } //else if (cargoMass)
+      if (fuelLevel.value < 10000) {
+         launchStatus.innerHTML = "Shuttle not ready for launch.";
+         launchStatus.style.color = "red";
+         //console.log(launchStatus.innerHTML)
+         fuelStatus.innerHTML = "Fuel level too low for successful journey.";
+         event.preventDefault();
+         faultyItems.style.visibility = "visible";
+      } else if (cargoMass.value > 10000) {
+         cargoStatus.innerHTML = "Cargo mass too heavy for take off.";
+         launchStatus.innerHTML = "Shuttle not ready for launch.";
+         launchStatus.style.color = "red";
+         event.preventDefault();
+      } else {
+         launchStatus.innerHTML = "Shuttle is ready for launch!";
+         launchStatus.style.color = "green";
 
+      }
+      event.preventDefault();  
    })
 })
 
