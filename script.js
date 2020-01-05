@@ -20,6 +20,23 @@ window.addEventListener("load", function() {
       //alert("submit clicked");
    })
 
+   let faultyItems = document.getElementById("faultyItems");
+   let pilotStatus = document.getElementById("pilotStatus");
+   pilotStatus.innerHTML = `${form.pilotName.value} ready`;
+   this.console.log(pilotStatus.innerHTML)
+   let copilotStatus = document.getElementById("copilotStatus");
+   copilotStatus.innerHTML = `${form.copilotName.value} ready`;
+   let fuelStatus = document.getElementById("fuelStatus");
+   let launchStatus = document.getElementById("launchStatus");
+
+   if (form.fuelLevel.value < 10,000) {
+      launchStatus.innerHTML = "Shuttle not ready for launch.";
+      console.log(launchStatus.innerHTML)
+      fuelStatus.innerHTML = "Fuel level too low for successful journey.";
+      faultyItems.style.visibility = "visible";
+   } //else if (cargoMass)
+
+
 })
 
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
