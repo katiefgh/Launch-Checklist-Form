@@ -62,11 +62,12 @@ window.addEventListener("load", function() {
          //console.log(launchStatus.innerHTML)
          fuelStatus.innerHTML = "Fuel level too low for successful journey.";
          event.preventDefault();
-         faultyItems.style.visibility = "visible";
+         
       } else if (cargoMass.value > 10000) {
          cargoStatus.innerHTML = "Cargo mass too heavy for take off.";
          launchStatus.innerHTML = "Shuttle not ready for launch.";
          launchStatus.style.color = "red";
+         faultyItems.style.visibility = "visible";
          event.preventDefault();
       } else {
          launchStatus.innerHTML = "Shuttle is ready for launch!";
